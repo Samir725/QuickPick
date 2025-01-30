@@ -175,7 +175,7 @@ footer {
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    padding-left: 20px;
 }
 
 .footerLinksNav {
@@ -199,17 +199,13 @@ footer {
 
 .footerSocial {
     width: 15%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    text-align: center;
     padding: 1rem;
 }
 
 .footerSocialIcons {
     padding: 1rem;
     font-size: 2rem;
-    display: flex;
-    gap: 0.8rem;
     color: #D9D9D9;
 }
 
@@ -230,6 +226,46 @@ footer {
 
 .copyright span {
     color: #A51910;
+}
+
+/*Mobile styles*/
+@media (max-width: 768px) {
+    .footerContent {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footerDescription {
+        padding: 0.5rem;
+        width: 100%;
+    }
+
+    .footerContact {
+        padding: 0.5rem;
+        width: 100%;
+    }
+
+    .footerLinks {
+        padding: 0.5rem;
+        width: 100%;
+    }
+
+    .footerSocial {
+        padding: 0.5rem;
+        width: 100%;
+        text-align: left;
+    }
+
+    .footerSocialIcons {
+        padding: 0;
+    }
+
+    .copyright {
+        padding: 0.5rem;
+        width: 100%;
+        margin: 0;
+        padding: 25px 13px;
+    }
 }
 
 /*Home page image*/
