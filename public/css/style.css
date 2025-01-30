@@ -235,17 +235,7 @@ footer {
         flex-direction: column;
     }
 
-    .footerDescription {
-        padding: 0.5rem;
-        width: 100%;
-    }
-
-    .footerContact {
-        padding: 0.5rem;
-        width: 100%;
-    }
-
-    .footerLinks {
+    .footerDescription, .footerContact, .footerLinks {
         padding: 0.5rem;
         width: 100%;
     }
