@@ -1,0 +1,56 @@
+<% layout("/layouts/boilerplate") %>
+
+<body>
+    <div class="showRoute">
+        <div class="productImageShow">
+            <img src="<%= product.image %>" alt="<%= product.title %>">
+        </div>
+
+        <div class="productDetails">
+            <ul>
+                <li id="productTitle"><%= product.title %></li>
+                <li id="productPrice"><i class="fa-solid fa-indian-rupee-sign"></i> <%= product.price.toLocaleString("en-IN") %></li>
+        
+                <div class="selectSize">
+                    <select>
+                        <option selected>Select Size</option>
+                        <option><li><%= product.size %></li></option>
+                    </select>
+                </div>
+        
+                <h3 id="pDetail">PRODUCT DETAILS</h3>
+                <li id="productDescription"><%= product.description %></li>
+
+                <div class="addToCartShow">
+                    <span id="incDecBtn"><button>-</button>1 <button>+</button></span>
+                    <form action="/cart/add/<%= product._id %>" method="POST">
+                        <button id="addToCartShowButton">Add To Cart</button>
+                    </form>
+                    <button id="buyNowBtn">Buy Now</button>
+                </div>
+            </ul>
+        </div>
+    </div>
+
+    <div class="allProductsPage">
+        <h1 id="allProductsTitle">Relative Products</h1>
+
+        <div class="products">
+            <% for(let products of allProducts) { %>
+                <a href="/products/<%= products._id %>" class="singleProducts"> 
+                    <div class="allProductsImage">
+                        <img src="<%= products.image %>" alt="<%= products.title %>">
+                    </div>
+
+                    <div class="allProductDetails">
+                        <span id="productsTitleProducts"><%= products.title %></span>
+                        <div class="priceAndButton">
+                            <span id="productsPrice"><i class="fa-solid fa-indian-rupee-sign"></i> <%= products.price.toLocaleString("en-IN") %> </span>
+                            <button class="addToCartButton" id="addToCartButton">+</button>
+                        </div>
+                    </div>
+                </a>
+            <% } %>
+        </div>
+    </div>
+</body>

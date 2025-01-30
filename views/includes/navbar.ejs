@@ -1,0 +1,58 @@
+<div class="navBar">
+    <a href="/">
+        <div class="logoImage">
+            <img src="/assets/QuickPick2-removebg-preview.png" alt="logo image">
+        </div>
+    </a>
+
+    <div class="navOptions">
+       <div class="searchBox">
+        <img src="/assets/searchIcon.png" alt="search icon"><input type="text" placeholder="Search Products">
+       </div>
+
+       <div class="navItem">
+            <a href="/">HOME</a>
+            <a href="/products">PRODUCTS</a>
+            <a href="">ABOUT</a>
+            <a href="">CONTACT</a>
+       </div>
+
+       <div class="cartIcon">
+        <!-- <i class="fa-solid fa-cart-shopping"></i> -->
+         <a href="/cart"><img src="/assets/cart1.png" alt="cart icon"></a>
+       </div>
+
+       <div class="profileIcon" id="profileIcon">
+            <i class="fa-solid fa-user"></i>
+            <div class="dropdownMenu" id="dropdownMenu">
+                <% if (!currentUser) { %>
+                    <a href="/login">Login</a>
+                    <a href="/signup">Signup</a>
+                <% } %>
+                <% if (currentUser) { %>
+                    <a href="/profile">Profile</a>
+                    <a href="/settings">Settings</a>
+                    <a href="/logout">Logout</a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    const profileIcon = document.getElementById("profileIcon");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+
+    profileIcon.addEventListener("click", () => {
+        dropdownMenu.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (event) => {
+        if (!profileIcon.contains(event.target)) {
+            dropdownMenu.classList.remove("show");
+        }
+    });
+
+</script>

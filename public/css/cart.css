@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.addToCartPage {
+    padding: 30px;
+}
+
+#cartTitle {
+    font-weight: 600;
+    padding: 30px 30px 0px 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 20px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+td img {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+}
+
+tbody tr td:nth-child(1) {
+    display: flex;
+    align-items: center;
+}
+
+tbody tr td button, thead tr th i {
+    padding: 2px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: none;
+    background-color: #fff;
+    transition: .3s ease-in;
+}
+
+tbody tr td button i {
+    transition: .3s ease-in;
+}
+
+tbody tr td button i:hover, thead tr th i:hover {
+    color: rgba(0, 0, 0, 0.584);
+}
+
+.quantity-form {
+    width: 6rem;
+    height: 2.5rem;
+    border-radius: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem;
+    background-color: #F4F4F4;
+}
+
+.quantity-form button {
+    width: 100%;
+    margin: 5px;
+    border: none;
+    background-color: #F4F4F4;
+    cursor: pointer;
+}
+
+.quantity-form button:hover {
+    background-color: #6d6d6d11;
+}
+
+.totalCheckout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.totalCheckout p {
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 20px;
+}
+
+.totalCheckout form button {
+    padding: .65rem 2rem;
+    border-radius: .5rem;
+    border: none;
+    background-color: #a51910;
+    color: #fff;
+    cursor: pointer;
+    transition: .3s ease-in;
+}
+
+.totalCheckout form button:hover {
+    background-color: #a51a10d9;
+}

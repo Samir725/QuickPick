@@ -1,0 +1,18 @@
+<% layout("/layouts/boilerplateHome") %>
+
+<div class="login-section">
+    <img src="/assets/signup-background.png" alt="">
+
+    <div class="login-form">
+        <div class="signup-login">
+            <a href="/login">LOG IN</a>
+            <a href="/signup">SIGN UP</a>
+        </div>
+
+        <form action="/login" method="post">
+            <input type="email" name="email" id="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">LOG IN</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<% layout('admin/layouts/boilerplate') %>
+
+<div class="edit-section">
+    <h2>Update Products</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% for(let products of allProducts) { %>
+                <tr>
+                    <td><img src="<%= products.image %>" alt="<%= products.title %>"></td>
+                    <td><span><%= products.title %></span></td>
+                    <td><span><i class="fa-solid fa-indian-rupee-sign"></i><%= products.price %></span></td>
+                    <td>
+                        <form action="/admin/editProducts/<%= products._id %>/edit?_method=GET" method="POST" style="display:inline;">
+                            <button type="submit" id="editBtn">Update</button>
+                        </form>
+                    </td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>

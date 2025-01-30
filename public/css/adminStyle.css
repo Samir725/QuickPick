@@ -1,0 +1,304 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+body {
+    display: flex;
+}
+
+.adminSideBar {
+    width: 300px;
+    height: 100vh;
+    background-color: #a51910;
+    padding: 20px 10px;
+    color: #fff;
+    position: fixed;
+}
+
+.sideBarTitle {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.sideBarMenu ul li a {
+    color: #d1d5db;
+    text-decoration: none;
+    display: block;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease, color 0.3s ease, border-radius 0.3s ease;
+}
+
+.sideBarMenu ul li a i {
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+.sideBarMenu ul li a:hover {
+    background-color: #ffffffd1;
+    color: #a51910;
+    border-radius: 1.5rem;
+}
+
+.container {
+    margin-left: 300px;
+    width: calc(100% - 300px);
+    background-color: #f1f1f1;
+}
+
+.searchArea {
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.search {
+    width: 22rem;
+    height: 2.2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.search input {
+    width: 82%;
+    border-radius: 0.3rem;
+    padding: 0.4rem;
+    border: 1px solid #a51910;
+    outline: none;
+}
+
+.search button {
+    width: 13%;
+    background-color: #a51910;
+    color: #fff;
+    border: none;
+    border-radius: 0.3rem;
+    cursor: pointer;
+}
+
+.userArea {
+    width: 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 2rem;
+}
+
+.userArea i {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.userArea i:hover {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: #edede9;
+    color: #a51910;
+    cursor: pointer;
+}
+
+
+/*Add products*/
+.addProducts {
+    background-color: #fff;
+    height: 100vh;
+    padding: 30px;
+}
+
+.addProductForm form{
+    border: 1px solid #a51910;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 30px;
+    padding: 20px;
+    width: 50%;
+    border-radius: 0.8rem;
+}
+
+.addProductForm form input {
+    padding: 0.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+    border: 1px solid #a51910;
+    border-radius: 0.3rem;
+    outline: none;
+}
+
+.addProductForm form textarea {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #a51910;
+    border-radius: 0.3rem;
+    outline: none;
+    height: 10rem;
+}
+
+.addProductForm form button {
+    padding: 0.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.3rem;
+    background-color: #a51910;
+    color: #fff;
+    cursor: pointer;
+}
+
+/*Delete Products*/
+.delete-section, .edit-section {
+    padding: 20px;
+    background-color: #fff;
+}
+
+.delete-section h2, .edit-section h2 {
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+td img {
+    width: 50px;
+    height: 50px;
+}
+
+td form button {
+    padding: .3rem 0.7rem;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 0.3rem;
+    background-color: #a51910;
+    color: #fff;
+    cursor: pointer;
+    transition: .3s ease-in;
+}
+
+td form button:hover {
+    background-color: #a51a10d6;
+}
+
+#editBtn {
+    padding: 0 0.7rem;
+    height: 2rem;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 0.3rem;
+    background-color: #fff;
+    color: #a51910;
+    cursor: pointer;
+    border: 1px solid #a51910;
+    transition: .3s ease-in;
+}
+
+#editBtn:hover {
+    background-color: #a51a10d6;
+    color: #fff;
+}
+
+/*Edit Products*/
+.editProducts {
+    background-color: #fff;
+    padding: 30px;
+}
+
+.editProducts form {
+    border: 1px solid #a51910;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 30px;
+    padding: 20px;
+    width: 50%;
+    border-radius: 0.8rem;
+}
+
+.editProducts form input {
+    padding: 0.5rem;
+    height: 2.5rem;
+    font-size: 0.9rem;
+    border: 1px solid #a51910;
+    border-radius: 0.3rem;
+    outline: none;
+}
+
+.editProducts form textarea {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #a51910;
+    border-radius: 0.3rem;
+    outline: none;
+    height: 10rem;
+}
+
+.editProducts form button {
+    padding: 0.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.3rem;
+    background-color: #a51910;
+    color: #fff;
+    cursor: pointer;
+}
+
+.editButton button {
+
+}
+
+/*Admin users*/
+.users-section {
+    padding: 20px;
+    background-color: #fff;
+}
+
+.admin-users {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.admin-users a {
+    border-radius: .3rem;
+    padding: 10px 20px;
+    background-color: #a51910;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: .3s ease-in;
+    text-decoration: none;
+}
+
+.admin-users a:hover {
+    background-color: #a51a10cc;
+}
+
+.users-section h2 {
+    padding-bottom: 10px;
+}

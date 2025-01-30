@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.flash {
+    padding: 15px 20px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.flash-success {
+    background-color: rgba(9, 236, 9, 0.386);
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.flash-error {
+    background-color: rgba(236, 9, 9, 0.386);
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.flash-close {
+    background: none;
+    padding: 0 20px;
+    font-size: 1.5rem;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    color: inherit;
+}
+
+.flash-close:hover {
+    background-color: #ffffff3e;
+}

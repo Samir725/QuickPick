@@ -1,0 +1,14 @@
+<% layout('admin/layouts/boilerSignup') %>
+
+<div class="signup-form">
+    <div class="signup-login">
+        <p>SIGN UP</p>
+    </div>
+
+    <form action="/admin/signup" method="post">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="email" name="email" id="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">SIGN UP</button>
+    </form>
+</div>

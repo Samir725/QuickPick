@@ -1,0 +1,54 @@
+<% layout('admin/layouts/boilerplate') %>
+
+<div class="users-section">
+    <div class="admin-users">
+        <h2>Admin Users</h2>
+        <a href="/admin/signup">Add Admin User</a>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% adminUsers.forEach(admin => { %>
+                <tr>
+                    <td><%= admin.username %></td>
+                    <td><%= admin.email %></td>
+                    <td>
+                        <form action="/admin/users/<%= admin._id %>?_method=DELETE" method="POST" style="display:inline;" onsubmit="return confirmDelete()">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+
+    <h2>Normal Users</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% users.forEach(user => { %>
+                <tr>
+                    <td><%= user.username %></td>
+                    <td><%= user.email %></td>
+                    <td>
+                        <form action="/admin/users/<%= user._id %>?_method=DELETE" method="POST" style="display:inline;" onsubmit="return confirmDelete()">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>

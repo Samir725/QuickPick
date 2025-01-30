@@ -1,0 +1,108 @@
+<% layout("/layouts/boilerplateHome") %>
+
+<body>
+    <div class="bgImage">
+        <img src="/assets/homebg.png" alt="Home background image">
+
+        <div class="bgGirlImage">
+            <img src="/assets/homeImg.png">
+        </div>
+
+        <div class="homeBgContent">
+            <h1>Shop Smarter, Not Harder!</h1>
+            <p>Success isn’t always about greatness. It’s about consistency. Consistent hard work gains success. Greatness will come.</p>
+
+            <a href="/products" id="productsBtn">
+                <div class="homeBtn">
+                    <button>Explore Now <span>&rarr;</span></i></button>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="allProductsPage">
+        <h1 id="allProductsTitle">Featured Products</h1>
+    
+        <div class="slider-container">
+            <button class="arrow left-arrow" id="featuredPrevButton">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+    
+            <div class="productsHome slider" id="featuredSlider">
+                <% for(let products of allProducts) { %>
+                    <a href="/products/<%= products._id %>" class="singleProductsHome">
+                        <div class="allProductsImage">
+                            <img src="<%= products.image %>" alt="<%= products.title %>">
+                        </div>
+                        <div class="allProductDetails">
+                            <span id="productsTitleProducts"><%= products.title %></span>
+                            <span><%= products.description %></span>
+                            <div class="priceAndButton">
+                                <span id="productsPrice">
+                                    <i class="fa-solid fa-indian-rupee-sign"></i> <%= products.price.toLocaleString("en-IN") %>
+                                </span>
+                                <form action="/cart/add/<%= products._id %>" method="POST">
+                                    <button class="addToCartButtonHome" id="addToCartButtonHome">+</button>
+                                </form>
+                            </div>
+                        </div>
+                    </a>
+                <% } %>
+            </div>
+    
+            <button class="arrow right-arrow" id="featuredNextButton">
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="offerBg">
+        <img src="/assets/offerbg.png" alt="offer background" class="offerImage">
+
+        <div class="offerContent">
+            <p>LIMITED OFFER</p>
+    
+            <h1><span>35%</span> Off only this friday and get special gift</h1>
+    
+            <div class="homeBtn">
+                <button>Grab it Now <span>&rarr;</span></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="allProductsPage">
+        <h1 id="allProductsTitle">Latest Products</h1>
+    
+        <div class="slider-container">
+            <button class="arrow left-arrow" id="latestPrevButton">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+    
+            <div class="productsHome slider" id="latestSlider">
+                <% for(let products of allProducts) { %>
+                    <a href="/products/<%= products._id %>" class="singleProductsHome">
+                        <div class="allProductsImage">
+                            <img src="<%= products.image %>" alt="<%= products.title %>">
+                        </div>
+                        <div class="allProductDetails">
+                            <span id="productsTitleProducts"><%= products.title %></span>
+                            <span><%= products.description %></span>
+                            <div class="priceAndButton">
+                                <span id="productsPrice">
+                                    <i class="fa-solid fa-indian-rupee-sign"></i> <%= products.price.toLocaleString("en-IN") %>
+                                </span>
+                                <form action="/cart/add/<%= products._id %>" method="POST">
+                                    <button class="addToCartButtonHome" type="submit">+</button>
+                                </form>
+                            </div>
+                        </div>
+                    </a>
+                <% } %>
+            </div>
+    
+            <button class="arrow right-arrow" id="latestNextButton">
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+</body>

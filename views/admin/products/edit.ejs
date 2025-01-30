@@ -1,0 +1,14 @@
+<% layout('admin/layouts/boilerplate') %>
+
+<div class="editProducts">
+    <h2>Edit Product</h2>
+
+    <form action="/admin/editProducts/<%= product._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+        <input type="text" name="title" value="<%= product.title %>" placeholder="Product Name">
+        <input type="file" name="image" value="<%= product.image %>" placeholder="Product Image">
+        <input type="number" name="price" value="<%= product.price %>" placeholder="Product Price">
+        <input type="tex" name="size" value="<%= product.size %>" placeholder="Product Size">
+        <textarea name="description" placeholder="Product Description"><%= product.description %></textarea>
+        <button type="submit">Update Product</button>
+    </form>
+</div>
