@@ -6,6 +6,7 @@ const { isAdminLoggedIn } = require('../middleware.js');
 const Product = require("../models/product.js");
 const Admin = require("../models/admin.js")
 const User = require("../models/user.js");
+const Order = require("../models/order.js");
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
@@ -54,11 +55,6 @@ router.delete('/products/:id', isAdminLoggedIn, async (req, res) => {
 });
 
 //Admin Edit Products route
-router.get("/editproducts", isAdminLoggedIn, async (req, res) => {
-    const allProducts = await Product.find({});
-    res.render("admin/products/editProducts.ejs", { allProducts });
-});
-
 router.get('/editProducts/:id/edit', isAdminLoggedIn, async (req, res) => {
     const { id } = req.params;
     const product = await Product.findById(id);
@@ -71,7 +67,7 @@ router.put('/editProducts/:id', isAdminLoggedIn, upload.single('image'), async (
     const imagePath = req.file ? `/uploads/${req.file.filename}` : req.body.existingImage; // Use uploaded image or default
     await Product.findByIdAndUpdate(id, { title, image: imagePath, price, size, description });
     req.flash('success', 'Product updated successfully!');
-    res.redirect('/admin/editproducts');
+    res.redirect('/admin/deleteproducts');
 });
 
 //Admin Users route
@@ -89,9 +85,19 @@ router.delete('/users/:id', isAdminLoggedIn, async (req, res) => {
     res.redirect('/admin/users');
 });
 
-//Admin Orders route
-router.get("/orders", isAdminLoggedIn, async (req, res) => {
-    res.render("admin/products/orders.ejs");
+// View Orders route for admin
+router.get('/orders', isAdminLoggedIn, async (req, res) => {
+    const orders = await Order.find({}).populate('items.product').populate('user');
+    res.render('admin/products/orders.ejs', { orders });
+});
+
+// Update Order Status route
+router.post('/orders/:id', isAdminLoggedIn, async (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body;
+    await Order.findByIdAndUpdate(id, { status });
+    req.flash('success', 'Order status updated successfully!');
+    res.redirect('/admin/orders');
 });
 
 module.exports = router;

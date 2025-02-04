@@ -9,7 +9,6 @@ const productSchema = new Schema({
     image: {
         type: String,
         default: "/assets/s-l1600 1.png",
-        // set: (v) => v === " " ? "/assets/s-l1600 1.png" : v,
         required: true,
     },
     price: {

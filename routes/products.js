@@ -3,11 +3,12 @@ const router = express.Router();
 const Product = require("../models/product.js");
 const Cart = require("../models/cart.js");
 const User = require("../models/user.js");
+const Order = require("../models/order.js");
 const { isLoggedIn } = require("../middleware.js")
 
 
 //Root route
-router.get("/", async (req, res) => {
+router.get("", async (req, res) => {
     const allProducts = await Product.find({});
     res.render("products/home.ejs", {allProducts});
 });
@@ -92,24 +93,71 @@ router.post("/cart/delete/:id", isLoggedIn, async (req, res) => {
     res.redirect("/cart");
 });
 
-// // Checkout route
-// router.get("/checkout", isLoggedIn, async (req, res) => {
-//     const cart = await Cart.findOne({}).populate("items.product");
-//     res.render("products/checkout.ejs", { cart });
-// });
-
 // Checkout route
 router.post("/cart/checkout", isLoggedIn,  async (req, res) => {
-    const cart = await Cart.findOne({ user: req.user._id });
+    const cart = await Cart.findOne({ user: req.user._id }).populate('items.product');
     if (!cart) {
         req.flash("error", "Your cart is empty!");
         return res.redirect("/cart");
     }
 
+    const order = new Order({
+        user: req.user._id,
+        items: cart.items,
+        totalPrice: cart.totalPrice
+    });
+
+    await order.save();
     await Cart.deleteOne({ user: req.user._id });
 
     req.flash("success", "Checkout successful!");
-    res.redirect("/products");
-})
+    res.redirect("/orders");
+});
+
+// Buy Now route
+router.post("/products/:id/buy", isLoggedIn, async (req, res) => {
+    const { id } = req.params;
+    const product = await Product.findById(id);
+    if (!product) {
+        req.flash("error", "Product not found!");
+        return res.redirect("/products");
+    }
+
+    const order = new Order({
+        user: req.user._id,
+        items: [{ product: product._id, quantity: 1 }],
+        totalPrice: product.price
+    });
+
+    await order.save();
+    req.flash("success", "Purchase successful!");
+    res.redirect("/orders");
+});
+
+// Profile route
+router.get("/profile", isLoggedIn, async (req, res) => {
+    const user = await User.findById(req.user._id).populate("cart");
+    res.render("users/profile.ejs", { user });
+});
+
+// Profile show route
+router.get("/profile/update", isLoggedIn, async (req, res) => {
+    const user = await User.findById(req.user._id);
+    res.render("users/profileUpdate.ejs", { user });
+});
+
+// Update Profile route
+router.post("/profile", isLoggedIn, async (req, res) => {
+    const { username, email, address } = req.body;
+    const user = await User.findById(req.user._id);
+
+    user.username = username;
+    user.email = email;
+    user.address = address;
+
+    await user.save();
+    req.flash("success", "Profile updated successfully!");
+    res.redirect("/profile");
+});
 
 module.exports = router;

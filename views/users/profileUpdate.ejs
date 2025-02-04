@@ -1,0 +1,12 @@
+<% layout("/layouts/boilerplate") %>
+
+<h1 id="profile">Update Profile</h1>
+
+<div class="profileUpdate">
+    <form action="/profile" method="POST">
+        <input type="text" id="username" name="username" value="<%= user.username %>">
+        <input type="email" id="email" name="email" value="<%= user.email %>">
+        <input type="text" id="address" name="address" value="<%= user.address %>">
+        <button type="submit">Update Profile</button>
+    </form>
+</div>

@@ -697,3 +697,92 @@ select {
 .show {
     display: block;
 }
+
+
+/* Profile styles */
+.profile {
+    border: 1px solid #a51910;
+    padding: 30px;
+    border-radius: .5rem;
+    width: 30%;
+    margin: 20px auto;
+}
+
+.update-button {
+    display: flex;
+    justify-content: right;
+}
+
+.update-button a {
+    border: 1px solid #a51910;
+    padding: .4rem;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.update-button a i {
+    color: #a51910;
+}
+
+/* .profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid #a51910;
+    margin: 0 auto 20px auto;
+}
+
+.profile-image img {
+    object-fit: ;
+} */
+
+.profile-data {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+#profile {
+    padding: 30px;
+}
+
+.profileUpdate {
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.profileUpdate form {
+    border: 1px solid #a51910;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 20px;
+    width: 50%;
+    border-radius: 0.8rem;
+}
+
+.profileUpdate form input {
+    padding: 0.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+    border: 1px solid #a51910;
+    border-radius: 0.3rem;
+    outline: none;
+}
+
+.profileUpdate form button {
+    padding: 0.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.3rem;
+    background-color: #a51910;
+    color: #fff;
+    cursor: pointer;
+}

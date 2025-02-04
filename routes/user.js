@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const User = require("../models/user");
-const { saveRedirectUrl } = require("../middleware");
+const Order = require("../models/order.js");
+const { saveRedirectUrl, isLoggedIn } = require("../middleware");
 
 //User registration route
 router.get("/signup", (req, res) => {
@@ -47,6 +48,12 @@ router.get("/logout", (req, res) => {
         req.flash("success", "Goodbye!");
         res.redirect("/products");
     });
+});
+
+// View Orders route for user
+router.get("/orders", isLoggedIn, async (req, res) => {
+    const orders = await Order.find({ user: req.user._id }).populate('items.product');
+    res.render("products/orders.ejs", { orders });
 });
 
 module.exports = router;

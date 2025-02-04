@@ -23,6 +23,10 @@
                         <form action="/admin/products/<%= products._id %>?_method=DELETE" method="POST" style="display:inline;" onsubmit="return confirmDelete()">
                             <button type="submit">Delete</button>
                         </form>
+
+                        <form action="/admin/editProducts/<%= products._id %>/edit?_method=GET" method="POST" style="display:inline;">
+                            <button type="submit" id="editBtn">Update</button>
+                        </form>
                     </td>
                 </tr>
             <% } %>

@@ -1,0 +1,14 @@
+<% layout("/layouts/boilerplate") %>
+
+<h1 id="profile">Profile</h1>
+
+<div class="profile">
+    <div class="update-button">
+        <a href="/profile/update"><i class="fa-solid fa-user-pen"></i></a>
+    </div>
+
+    <div class="profile-data">
+        <label for="name">Username : <%= user.username %> </label>
+        <label for="email">Email : <%= user.email %> </label>
+    </div>
+</div>
