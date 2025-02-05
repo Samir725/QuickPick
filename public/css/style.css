@@ -815,6 +815,9 @@ select {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #f0f0f0;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
 }
 
 #orderId h3 {
@@ -870,4 +873,7 @@ select {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    background-color: #f0f0f0;
+    border-bottom-left-radius: .5rem;
+    border-bottom-right-radius: .5rem;
 }

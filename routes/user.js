@@ -56,7 +56,7 @@ router.get("/logout", (req, res) => {
 // View Orders route for user
 router.get("/orders", isLoggedIn, async (req, res) => {
     const allProducts = await Product.find({});
-    const orders = await Order.find({ user: req.user._id }).populate('items.product');
+    const orders = await Order.find({ user: req.user._id }).sort({ createdAt: -1 }).populate('items.product');
     res.render("products/orders.ejs", { orders, allProducts });
 });
 

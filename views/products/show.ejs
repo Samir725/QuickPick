@@ -39,19 +39,23 @@
 
         <div class="products">
             <% for(let products of allProducts) { %>
-                <a href="/products/<%= products._id %>" class="singleProducts"> 
-                    <div class="allProductsImage">
-                        <img src="<%= products.image %>" alt="<%= products.title %>">
-                    </div>
-
-                    <div class="allProductDetails">
-                        <span id="productsTitleProducts"><%= products.title %></span>
-                        <div class="priceAndButton">
-                            <span id="productsPrice"><i class="fa-solid fa-indian-rupee-sign"></i> <%= products.price.toLocaleString("en-IN") %> </span>
-                            <button class="addToCartButton" id="addToCartButton">+</button>
+                <div class="products-div">
+                    <a href="/products/<%= products._id %>" class="singleProducts"> 
+                        <div class="allProductsImage">
+                            <img src="<%= products.image %>" alt="<%= products.title %>">
                         </div>
-                    </div>
-                </a>
+
+                        <div class="allProductDetails">
+                            <span id="productsTitleProducts"><%= products.title %></span>
+                            <div class="priceAndButton">
+                                <span id="productsPrice"><i class="fa-solid fa-indian-rupee-sign"></i> <%= products.price.toLocaleString("en-IN") %> </span>
+                                <form action="/cart/add/<%= products._id %>" method="POST">
+                                    <button class="addToCartButton" id="addToCartButton">+</button>
+                                </form>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             <% } %>
         </div>
     </div>
