@@ -3,9 +3,10 @@ const router = express.Router();
 const passport = require("passport");
 const User = require("../models/user");
 const Order = require("../models/order.js");
+const Product = require("../models/product.js");
 const { saveRedirectUrl, isLoggedIn } = require("../middleware");
 
-const Product = require("../models/product.js");
+
 
 //User registration route
 router.get("/signup", (req, res) => {

@@ -87,8 +87,9 @@ router.delete('/users/:id', isAdminLoggedIn, async (req, res) => {
 
 // View Orders route for admin
 router.get('/orders', isAdminLoggedIn, async (req, res) => {
+    const allProducts = await Product.find({});
     const orders = await Order.find({}).populate('items.product').populate('user');
-    res.render('admin/products/orders.ejs', { orders });
+    res.render('admin/products/orders.ejs', { orders, allProducts });
 });
 
 // Update Order Status route
