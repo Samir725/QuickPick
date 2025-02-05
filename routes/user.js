@@ -5,6 +5,8 @@ const User = require("../models/user");
 const Order = require("../models/order.js");
 const { saveRedirectUrl, isLoggedIn } = require("../middleware");
 
+const Product = require("../models/product.js");
+
 //User registration route
 router.get("/signup", (req, res) => {
     res.render("users/signup.ejs");
@@ -52,8 +54,9 @@ router.get("/logout", (req, res) => {
 
 // View Orders route for user
 router.get("/orders", isLoggedIn, async (req, res) => {
+    const allProducts = await Product.find({});
     const orders = await Order.find({ user: req.user._id }).populate('items.product');
-    res.render("products/orders.ejs", { orders });
+    res.render("products/orders.ejs", { orders, allProducts });
 });
 
 module.exports = router;

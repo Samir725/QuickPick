@@ -1,22 +1,39 @@
 <% layout('layouts/boilerplate') %>
 
-<h1>Your Orders</h1>
+<div class="order-div">
+    <h1>My Orders</h1>
 
-<% if (orders.length > 0) { %>
-    <% orders.forEach(order => { %>
-        <div class="order">
-            <h2>Order ID: <%= order._id %></h2>
-            <p>Status: <%= order.status %></p>
-            <p>Total Price: $<%= order.totalPrice %></p>
-            <ul>
-                <% order.items.forEach(item => { %>
-                    <li>
-                        <%= item.product.title %> - $<%= item.product.price %> x <%= item.quantity %>
-                    </li>
-                <% }) %>
-            </ul>
-        </div>
-    <% }) %>
-<% } else { %>
-    <p>You have no orders.</p>
-<% } %>
+    <div class="orders">
+        <% if (orders.length > 0) { %>
+            <% orders.forEach(order => { %>
+                <div class="order">
+                    <div id="orderId">
+                        <h3>Order ID: <%= order._id %></h3>
+                        <span><%= order.status %></span>
+                    </div>
+                    <div id="orderDetails">
+                        <% if (allProducts.length > 0) { %>
+                            <% order.items.forEach(item => { %>
+                                <div class="multipleOrders">
+                                    <img src="<%= item.product.image %>" alt="<%= item.product.title %>">
+                                    <div class="titleDescription">
+                                        <p><%= item.product.title %></p>
+                                        <p><%= item.product.description %></p>
+                                    </div>
+                                    <span><i class="fa-solid fa-indian-rupee-sign"></i> <%= item.product.price %></span>
+                                    <span id="qty">Qty: <%= item.quantity %></span>
+                                </div>
+                            <% }) %>
+                        <% } %>
+                    </div>
+                    <div class="totalPrice">
+                        <p>Total Price : </p>
+                        <span><i class="fa-solid fa-indian-rupee-sign"></i> <%= order.totalPrice %></span>
+                    </div>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <p>You have no orders.</p>
+        <% } %>
+    </div>
+</div>
