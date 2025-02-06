@@ -829,7 +829,8 @@ select {
     border-radius: 3rem;
     font-size: .9rem;
     font-weight: 400;
-    background-color: #ecf0f7;
+    background-color: #a51910;
+    color: #fff;
 }
 
 #orderDetails {

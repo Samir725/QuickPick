@@ -21,11 +21,20 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 
-//Admin route
+//Admin dashboard route
 router.get("", isAdminLoggedIn, async (req, res) => {
-    const allProducts = await Product.find({});
-    const orders = await Order.find({}).sort({ createdAt: -1 }).populate('items.product').populate('user');
-    res.render("admin/products/dashboard.ejs", { allProducts, orders });
+    try {
+        const allProducts = await Product.find({});
+        const orders = await Order.find({}).sort({ createdAt: -1 }).populate('items.product').populate('user');
+        const totalRevenue = orders.reduce((total, order) => total + order.totalPrice, 0);
+        const totalCustomers = await User.countDocuments({});
+        const totalProductsInStock = await Product.countDocuments({});
+        res.render("admin/products/dashboard.ejs", { allProducts, orders, totalRevenue, totalCustomers, totalProductsInStock });
+    } catch (err) {
+        console.error(err);
+        req.flash('error', 'Failed to load dashboard data.');
+        res.redirect('/admin');
+    }
 });
 
 //Admin Add Products route

@@ -14,7 +14,38 @@
 
 <div class="dashboardArea">
     <div>
-        <h1>Dashboard</h1>
+        <h1 id="dashboardTitle">Dashboard</h1>
+
+        <div class="cards">
+            <div class="card">
+                <div class="titleIcon">
+                    <p>Total Revenue</p>
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                </div>
+                <span><i class="fa-solid fa-indian-rupee-sign"></i> <%= totalRevenue.toFixed(2) %></span>
+            </div>
+            <div class="card">
+                <div class="titleIcon">
+                    <p>Total Customers</p>
+                    <i class="fa-solid fa-user-group"></i>
+                </div>
+                <span>+ <%= totalCustomers %></span>
+            </div>
+            <div class="card">
+                <div class="titleIcon">
+                    <p>Total Orders</p>
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+                <span>+ <%= orders.length %></span>
+            </div>
+            <div class="card">
+                <div class="titleIcon">
+                    <P>Products in Stock</P>
+                    <i class="fa-solid fa-cubes"></i>
+                </div>
+                <span><%= totalProductsInStock %></span>
+            </div>
+        </div>
     </div>
 
     <div id="recentOrders">
