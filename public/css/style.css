@@ -50,17 +50,22 @@
 
 .profileIcon {
     margin-right: 4rem;
-    border: 2px solid black;
+    border: 1px solid #a51910;
     height: 2.3rem;
     width: 2.3rem;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black;
-    color: white;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     cursor: pointer;
+}
+
+.profileIcon img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    
 }
 
 .cartIcon {
@@ -723,23 +728,37 @@ select {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: .3s ease-in;
 }
 
 .update-button a i {
     color: #a51910;
+    transition: .3s ease-in;
 }
 
-/* .profile-image {
+.update-button a:hover {
+    background-color: #a51910;
+    color: #fff;
+}
+
+.update-button a i:hover {
+    color: #fff;
+}
+
+.profile-image {
     width: 100px;
     height: 100px;
     border-radius: 50%;
     border: 1px solid #a51910;
-    margin: 0 auto 20px auto;
+    margin: 0 auto;
 }
 
 .profile-image img {
-    object-fit: ;
-} */
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    padding: 2px;
+}
 
 .profile-data {
     display: flex;
@@ -786,6 +805,70 @@ select {
     background-color: #a51910;
     color: #fff;
     cursor: pointer;
+}
+
+.addressProfile {
+    border: 1px solid #a51910;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 30%;
+    border-radius: 0.8rem;
+    margin: 20px auto;
+}
+
+.addressProfile a {
+    text-decoration: none;
+    border: 1px solid #a51910;
+    padding: 5px 10px;
+    width: fit-content;
+    color: black;
+    border-radius: .3rem;
+    margin: 10px auto 0;
+    transition: .3s ease-in;
+}
+
+.addressProfile a:hover {
+    background-color: #a51910;
+    color: #fff;
+}
+
+/* Address order route styling */
+.addressPage {
+    padding: 30px;
+}
+
+.addressPage form {
+    border: 1px solid #a51910;
+    display: flex;
+    flex-direction: column;
+    border-radius: .4rem;
+    padding: 20px;
+    width: 40%;
+    margin: 30px auto 10px;
+    gap: 20px;
+}
+
+.addressPage form input {
+    padding: 10px;
+    border-radius: .3rem;
+    border: 1px solid #a51910;
+    outline: none;
+    font-size: .9rem;
+}
+
+.addressPage form button {
+    padding: 10px;
+    border-radius: .3rem;
+    background-color: #a51910;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: .3s ease-in;
+}
+
+.addressPage form button:hover {
+    background-color: #a51a10dd;
 }
 
 /* Orders route styling*/
@@ -877,4 +960,129 @@ select {
     background-color: #f0f0f0;
     border-bottom-left-radius: .5rem;
     border-bottom-right-radius: .5rem;
+}
+
+/* Contact page styling */
+.contactPage {
+    padding: 2rem;
+    text-align: center;
+}
+
+.contactPage form {
+    width: 40rem;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contactPage form input {
+    height: 40px;
+    border-radius: .4rem;
+    border: 1px solid #a51910;
+    padding: 10px;
+    font-size: .9rem;
+    outline: none;
+}
+
+.contactPage form textarea {
+    height: 150px;
+    padding: 10px;
+    font-size: .9rem;
+    border-radius: .4rem;
+    border: 1px solid #a51910;
+    outline: none;
+}
+
+.contactPage form button {
+    height: 40px;
+    padding: 10px;
+    font-size: .9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .4rem;
+    border: none;
+    background-color: #A51910;
+    color: #fff;
+    cursor: pointer;
+    transition: .3s ease-in;
+}
+
+.contactPage form button:hover {
+    background-color: #a51a10dd;
+}
+
+/* About Page */
+.aboutPage {
+    padding: 2rem;
+    /* border: 1px solid #a51910; */
+    background-color: #f2e9e4;
+    text-align: center;
+    max-width: 900px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.aboutPage h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+    font-weight: bold;
+}
+
+.aboutPage h2 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    color: #333;
+    font-weight: bold;
+}
+
+.aboutPage p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.aboutPage ul {
+    text-align: left;
+}
+
+.aboutPage ul li {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #555;
+    line-height: 1.6;
+    padding-left: .8rem;
+}
+
+.aboutPage a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+.aboutPage a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .aboutPage {
+        padding: 1rem;
+    }
+
+    .aboutPage h1 {
+        font-size: 1.5rem;
+    }
+
+    .aboutPage h2 {
+        font-size: 1.5rem;
+    }
+
+    .aboutPage p,
+    .aboutPage ul li {
+        font-size: 1rem;
+    }
 }

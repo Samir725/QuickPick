@@ -13,8 +13,8 @@
        <div class="navItem">
             <a href="/">HOME</a>
             <a href="/products">PRODUCTS</a>
-            <a href="">ABOUT</a>
-            <a href="">CONTACT</a>
+            <a href="/about">ABOUT</a>
+            <a href="/contact">CONTACT</a>
        </div>
 
        <div class="cartIcon">
@@ -23,7 +23,11 @@
        </div>
 
        <div class="profileIcon" id="profileIcon">
-            <i class="fa-solid fa-user"></i>
+            <% if (currentUser && currentUser.profileImage) { %>
+                <img src="<%= currentUser.profileImage %>" alt="Profile Image" class="profileImage">
+            <% } else { %>
+                <i class="fa-solid fa-user"></i>
+            <% } %>
             <div class="dropdownMenu" id="dropdownMenu">
                 <% if (!currentUser) { %>
                     <a href="/login">Login</a>

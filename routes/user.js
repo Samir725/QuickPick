@@ -7,7 +7,6 @@ const Product = require("../models/product.js");
 const { saveRedirectUrl, isLoggedIn } = require("../middleware");
 
 
-
 //User registration route
 router.get("/signup", (req, res) => {
     res.render("users/signup.ejs");

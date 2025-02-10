@@ -14,6 +14,13 @@ const orderItemSchema = new Schema({
     }
 });
 
+const addressSchema = new Schema({
+    street: String,
+    city: String,
+    state: String,
+    country: String
+});
+
 const orderSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
@@ -30,6 +37,7 @@ const orderSchema = new Schema({
         required: true,
         default: 'Pending'
     },
+    deliveryAddress: addressSchema,
     createdAt: {
         type: Date,
         default: Date.now

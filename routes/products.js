@@ -1,10 +1,22 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
 const Product = require("../models/product.js");
 const Cart = require("../models/cart.js");
 const User = require("../models/user.js");
 const Order = require("../models/order.js");
 const { isLoggedIn } = require("../middleware.js")
+
+// Configure multer for profile image upload
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/');
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + '-' + file.originalname);
+    }
+});
+const upload = multer({ storage });
 
 
 //Root route
@@ -140,10 +152,31 @@ router.get("/profile", isLoggedIn, async (req, res) => {
     res.render("users/profile.ejs", { user });
 });
 
-// Profile show route
+// Show profile form route
 router.get("/profile/update", isLoggedIn, async (req, res) => {
     const user = await User.findById(req.user._id);
     res.render("users/profileUpdate.ejs", { user });
+});
+
+// Show address form route
+router.get('/profile/address', isLoggedIn, async (req, res) => {
+    const user = await User.findById(req.user._id);
+    res.render('users/address.ejs', { user });
+});
+
+// Update profile image route
+router.post("/profile/image", isLoggedIn, upload.single('profileImage'), async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        user.profileImage = '/uploads/' + req.file.filename;
+        await user.save();
+        req.flash("success", "Profile image updated successfully!");
+        res.redirect("/profile");
+    } catch (err) {
+        console.error(err);
+        req.flash("error", "Failed to update profile image. Please try again.");
+        res.redirect("/profile");
+    }
 });
 
 // Update Profile route
@@ -158,6 +191,30 @@ router.post("/profile", isLoggedIn, async (req, res) => {
     await user.save();
     req.flash("success", "Profile updated successfully!");
     res.redirect("/profile");
+});
+
+// Update address route
+router.post('/profile/address', isLoggedIn, async (req, res) => {
+    const { street, city, state, country } = req.body;
+    await User.findByIdAndUpdate(req.user._id, { address: { street, city, state, country } });
+    req.flash('success', 'Address updated successfully!');
+    res.redirect('/profile');
+});
+
+// About route
+router.get("/about", (req, res) => {
+    res.render("products/about.ejs");
+});
+
+// Contact route
+router.get("/contact", (req, res) => {
+    res.render("products/contact.ejs");
+});
+
+router.post("/contact", async (req, res) => {
+    const { name, email, message } = req.body;
+    req.flash('success', 'Your message has been sent successfully!');
+    res.redirect('/contact');
 });
 
 module.exports = router;

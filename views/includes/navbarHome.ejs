@@ -23,18 +23,22 @@
        </div>
 
        <div class="profileIcon" id="profileIcon">
-        <i class="fa-solid fa-user"></i>
-        <div class="dropdownMenu" id="dropdownMenu">
-            <% if (!currentUser) { %>
-                <a href="/login">Login</a>
-                <a href="/signup">Signup</a>
+            <% if (currentUser && currentUser.profileImage) { %>
+                <img src="<%= currentUser.profileImage %>" alt="Profile Image" class="profileImage">
+            <% } else { %>
+                <i class="fa-solid fa-user"></i>
             <% } %>
-            <% if (currentUser) { %>
-                <a href="/profile">Profile</a>
-                <a href="/orders">Orders</a>
-                <a href="/logout">Logout</a>
-            <% } %>
-        </div>
+            <div class="dropdownMenu" id="dropdownMenu">
+                <% if (!currentUser) { %>
+                    <a href="/login">Login</a>
+                    <a href="/signup">Signup</a>
+                <% } %>
+                <% if (currentUser) { %>
+                    <a href="/profile">Profile</a>
+                    <a href="/orders">Orders</a>
+                    <a href="/logout">Logout</a>
+                <% } %>
+            </div>
        </div>
     </div>
 </div>
