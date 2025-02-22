@@ -7,6 +7,12 @@ const orderItemSchema = new Schema({
         ref: 'Product',
         required: true
     },
+    productSnapshot: {
+        title: String,
+        price: Number,
+        description: String,
+        image: String
+    },
     quantity: {
         type: Number,
         required: true,

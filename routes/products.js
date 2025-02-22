@@ -113,10 +113,22 @@ router.post("/cart/checkout", isLoggedIn,  async (req, res) => {
         return res.redirect("/cart");
     }
 
+    const orderItems = cart.items.map(item => ({
+        product: item.product._id,
+        productSnapshot: {
+            title: item.product.title,
+            price: item.product.price,
+            description: item.product.description,
+            image: item.product.image
+        },
+        quantity: item.quantity
+    }));
+
     const order = new Order({
         user: req.user._id,
-        items: cart.items,
-        totalPrice: cart.totalPrice
+        items: orderItems,
+        totalPrice: cart.totalPrice,
+        deliveryAddress: req.body.deliveryAddress // Assuming delivery address is provided in the request body
     });
 
     await order.save();
@@ -135,10 +147,22 @@ router.post("/products/:id/buy", isLoggedIn, async (req, res) => {
         return res.redirect("/products");
     }
 
+    const orderItems = [{
+        product: product._id,
+        productSnapshot: {
+            title: product.title,
+            price: product.price,
+            description: product.description,
+            image: product.image
+        },
+        quantity: 1
+    }];
+
     const order = new Order({
         user: req.user._id,
-        items: [{ product: product._id, quantity: 1 }],
-        totalPrice: product.price
+        items: orderItems,
+        totalPrice: product.price,
+        deliveryAddress: req.body.deliveryAddress // Assuming delivery address is provided in the request body
     });
 
     await order.save();
