@@ -66,7 +66,7 @@ router.post("/cart/add/:id", isLoggedIn, async (req, res) => {
     await cart.save();
 
     req.flash("success", "Product added to cart!");
-    res.redirect("/cart");
+    res.redirect("/products");
 });
 
 // Update Cart Item Quantity route
@@ -105,69 +105,153 @@ router.post("/cart/delete/:id", isLoggedIn, async (req, res) => {
     res.redirect("/cart");
 });
 
+// Address selection route
+router.get("/select-address", isLoggedIn, async (req, res) => {
+    const user = await User.findById(req.user._id);
+    res.render("products/selectAddress.ejs", { user });
+});
+
+
+router.post("/submit-order", isLoggedIn, async (req, res) => {
+    const address = JSON.parse(req.body.address);
+
+    if (req.session.cartCheckout) {
+        const cart = await Cart.findOne({ user: req.user._id }).populate('items.product');
+        if (!cart) {
+            req.flash("error", "Your cart is empty!");
+            return res.redirect("/cart");
+        }
+
+        const orderItems = cart.items.map(item => ({
+            product: item.product._id,
+            productSnapshot: {
+                title: item.product.title,
+                price: item.product.price,
+                description: item.product.description,
+                image: item.product.image
+            },
+            quantity: item.quantity
+        }));
+
+        const order = new Order({
+            user: req.user._id,
+            items: orderItems,
+            totalPrice: cart.totalPrice,
+            deliveryAddress: address
+        });
+
+        await order.save();
+        await Cart.deleteOne({ user: req.user._id });
+
+        req.flash("success", "Checkout successful!");
+        req.session.cartCheckout = null;
+        res.redirect("/orders");
+    } else if (req.session.buyNowProduct) {
+        const product = req.session.buyNowProduct;
+
+        const orderItems = [{
+            product: product._id,
+            productSnapshot: {
+                title: product.title,
+                price: product.price,
+                description: product.description,
+                image: product.image
+            },
+            quantity: 1
+        }];
+
+        const order = new Order({
+            user: req.user._id,
+            items: orderItems,
+            totalPrice: product.price,
+            deliveryAddress: address
+        });
+
+        await order.save();
+        req.flash("success", "Purchase successful!");
+        req.session.buyNowProduct = null;
+        res.redirect("/orders");
+    } else {
+        req.flash("error", "Invalid order request.");
+        res.redirect("/products");
+    }
+});
+
 // Checkout route
 router.post("/cart/checkout", isLoggedIn,  async (req, res) => {
-    const cart = await Cart.findOne({ user: req.user._id }).populate('items.product');
-    if (!cart) {
-        req.flash("error", "Your cart is empty!");
-        return res.redirect("/cart");
-    }
+    // const cart = await Cart.findOne({ user: req.user._id }).populate('items.product');
+    // if (!cart) {
+    //     req.flash("error", "Your cart is empty!");
+    //     return res.redirect("/cart");
+    // }
 
-    const orderItems = cart.items.map(item => ({
-        product: item.product._id,
-        productSnapshot: {
-            title: item.product.title,
-            price: item.product.price,
-            description: item.product.description,
-            image: item.product.image
-        },
-        quantity: item.quantity
-    }));
+    // const orderItems = cart.items.map(item => ({
+    //     product: item.product._id,
+    //     productSnapshot: {
+    //         title: item.product.title,
+    //         price: item.product.price,
+    //         description: item.product.description,
+    //         image: item.product.image
+    //     },
+    //     quantity: item.quantity
+    // }));
 
-    const order = new Order({
-        user: req.user._id,
-        items: orderItems,
-        totalPrice: cart.totalPrice,
-        deliveryAddress: req.body.deliveryAddress // Assuming delivery address is provided in the request body
-    });
+    // const order = new Order({
+    //     user: req.user._id,
+    //     items: orderItems,
+    //     totalPrice: cart.totalPrice,
+    //     deliveryAddress: req.body.deliveryAddress // Assuming delivery address is provided in the request body
+    // });
 
-    await order.save();
-    await Cart.deleteOne({ user: req.user._id });
+    // await order.save();
+    // await Cart.deleteOne({ user: req.user._id });
 
-    req.flash("success", "Checkout successful!");
-    res.redirect("/orders");
+    // req.flash("success", "Checkout successful!");
+    // res.redirect("/orders");
+
+    req.session.cartCheckout = true;
+    res.redirect("/select-address");
 });
 
 // Buy Now route
 router.post("/products/:id/buy", isLoggedIn, async (req, res) => {
+    // const { id } = req.params;
+    // const product = await Product.findById(id);
+    // if (!product) {
+    //     req.flash("error", "Product not found!");
+    //     return res.redirect("/products");
+    // }
+
+    // const orderItems = [{
+    //     product: product._id,
+    //     productSnapshot: {
+    //         title: product.title,
+    //         price: product.price,
+    //         description: product.description,
+    //         image: product.image
+    //     },
+    //     quantity: 1
+    // }];
+
+    // const order = new Order({
+    //     user: req.user._id,
+    //     items: orderItems,
+    //     totalPrice: product.price,
+    //     deliveryAddress: req.body.deliveryAddress // Assuming delivery address is provided in the request body
+    // });
+
+    // await order.save();
+    // req.flash("success", "Purchase successful!");
+    // res.redirect("/orders");
+
     const { id } = req.params;
     const product = await Product.findById(id);
     if (!product) {
         req.flash("error", "Product not found!");
         return res.redirect("/products");
     }
-
-    const orderItems = [{
-        product: product._id,
-        productSnapshot: {
-            title: product.title,
-            price: product.price,
-            description: product.description,
-            image: product.image
-        },
-        quantity: 1
-    }];
-
-    const order = new Order({
-        user: req.user._id,
-        items: orderItems,
-        totalPrice: product.price,
-        deliveryAddress: req.body.deliveryAddress // Assuming delivery address is provided in the request body
-    });
-
-    await order.save();
-    req.flash("success", "Purchase successful!");
-    res.redirect("/orders");
+    req.session.buyNowProduct = product;
+    res.redirect("/select-address");
 });
 
 // Profile route
@@ -182,10 +266,17 @@ router.get("/profile/update", isLoggedIn, async (req, res) => {
     res.render("users/profileUpdate.ejs", { user });
 });
 
-// Show address form route
-router.get('/profile/address', isLoggedIn, async (req, res) => {
+// Show new address form route
+router.get('/profile/address/new', isLoggedIn, (req, res) => {
+    res.render('users/newAddress.ejs');
+});
+
+// Show update address form route
+router.get('/profile/address/:id/update', isLoggedIn, async (req, res) => {
+    const { id } = req.params;
     const user = await User.findById(req.user._id);
-    res.render('users/address.ejs', { user });
+    const address = user.addresses.id(id);
+    res.render('users/updateAddress.ejs', { address });
 });
 
 // Update profile image route
@@ -205,22 +296,47 @@ router.post("/profile/image", isLoggedIn, upload.single('profileImage'), async (
 
 // Update Profile route
 router.post("/profile", isLoggedIn, async (req, res) => {
-    const { username, email, address } = req.body;
+    const { username, email } = req.body;
     const user = await User.findById(req.user._id);
 
     user.username = username;
     user.email = email;
-    user.address = address;
 
     await user.save();
     req.flash("success", "Profile updated successfully!");
     res.redirect("/profile");
 });
 
-// Update address route
+// Add new address route
 router.post('/profile/address', isLoggedIn, async (req, res) => {
     const { street, city, state, country } = req.body;
-    await User.findByIdAndUpdate(req.user._id, { address: { street, city, state, country } });
+    const user = await User.findById(req.user._id);
+    user.addresses.push({ street, city, state, country });
+    await user.save();
+    req.flash('success', 'Address added successfully!');
+    res.redirect('/profile');
+});
+
+// Delete address route
+router.post('/profile/address/:id/delete', isLoggedIn, async (req, res) => {
+    const { id } = req.params;
+    await User.findByIdAndUpdate(req.user._id, { $pull: { addresses: { _id: id } } });
+    req.flash('success', 'Address deleted successfully!');
+    res.redirect('/profile');
+});
+
+// Update address route
+router.put('/profile/address/:id', isLoggedIn, async (req, res) => {
+    const { id } = req.params;
+    const { street, city, state, country } = req.body;
+    const user = await User.findById(req.user._id);
+    const address = user.addresses.id(id);
+
+    address.street = street;
+    address.city = city;
+    address.state = state;
+    address.country = country;
+    await user.save();
     req.flash('success', 'Address updated successfully!');
     res.redirect('/profile');
 });

@@ -10,6 +10,7 @@
                     <div class="orderUserDetail">
                         <h3>Order ID: <%= order._id %></h3>
                         <p>Ordered User : <%= order.user.email %></p>
+                        <p>Delivery Address: <%= order.deliveryAddress.street %>, <%= order.deliveryAddress.city %>, <%= order.deliveryAddress.state %>, <%= order.deliveryAddress.country %></p>
                     </div>
                     <form action="/admin/orders/<%= order._id %>" method="POST">
                         <select name="status" id="status">

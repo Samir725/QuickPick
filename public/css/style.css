@@ -812,9 +812,35 @@ select {
     display: flex;
     flex-direction: column;
     padding: 20px;
-    width: 30%;
+    width: 40%;
     border-radius: 0.8rem;
     margin: 20px auto;
+}
+
+.address {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.address-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.address form button {
+    padding: .3rem 0.7rem;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 0.3rem;
+    background-color: #a51910;
+    color: #fff;
+    cursor: pointer;
+    transition: .3s ease-in;
+}
+
+.address form button:hover {
+    background-color: #a51a10dd;
 }
 
 .addressProfile a {
@@ -834,11 +860,11 @@ select {
 }
 
 /* Address order route styling */
-.addressPage {
+.addressPage, .newAddressPage {
     padding: 30px;
 }
 
-.addressPage form {
+.addressPage form, .newAddressPage form {
     border: 1px solid #a51910;
     display: flex;
     flex-direction: column;
@@ -849,7 +875,7 @@ select {
     gap: 20px;
 }
 
-.addressPage form input {
+.addressPage form input, .newAddressPage form input {
     padding: 10px;
     border-radius: .3rem;
     border: 1px solid #a51910;
@@ -857,7 +883,7 @@ select {
     font-size: .9rem;
 }
 
-.addressPage form button {
+.addressPage form button, .newAddressPage form button {
     padding: 10px;
     border-radius: .3rem;
     background-color: #a51910;
@@ -868,6 +894,47 @@ select {
 }
 
 .addressPage form button:hover {
+    background-color: #a51a10dd;
+}
+
+/* Select Address route */
+.selectAddressH1 {
+    margin: 20px;
+}
+
+.select-address {
+    border: 1px solid #a51910;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 40%;
+    border-radius: 0.8rem;
+    margin: 50px auto;
+}
+
+.select-address form select {
+    margin-left: 20px;
+    border: 1px solid #a51910;
+}
+
+.select-address form {
+    display: flex;
+    flex-direction: column;
+}
+
+.select-address form button {
+    padding: 0.5rem;
+    height: 2.3rem;
+    font-size: .9rem;
+    border: none;
+    border-radius: 0.3rem;
+    background-color: #a51910;
+    color: #fff;
+    cursor: pointer;
+    transition: .3s ease-in;
+}
+
+.select-address form button:hover {
     background-color: #a51a10dd;
 }
 

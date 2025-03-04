@@ -24,7 +24,7 @@ const userSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Cart"
     },
-    address: addressSchema,
+    addresses: [addressSchema],
     profileImage: {
         type: String // URL or path to the profile image
     }

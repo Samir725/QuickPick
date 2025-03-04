@@ -1,0 +1,20 @@
+<% layout('layouts/boilerplate') %>
+
+<h1 class="selectAddressH1">Select Address</h1>
+
+<div class="select-address">
+    <form action="/submit-order" method="POST">
+        <div>
+            <label for="address">Select Address:</label>
+            <select name="address" id="address" required>
+                <option value="">--Select Address--</option>
+                <% user.addresses.forEach(address => { %>
+                    <option value='<%= JSON.stringify(address) %>'>
+                        <%= address.street %>, <%= address.city %>, <%= address.state %>, <%= address.zip %>, <%= address.country %>
+                    </option>
+                <% }) %>
+            </select>
+        </div>
+        <button type="submit">Submit Order</button>
+    </form>
+</div>
